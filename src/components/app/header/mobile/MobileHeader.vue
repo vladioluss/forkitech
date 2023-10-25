@@ -2,13 +2,13 @@
 import Logo from "@/components/app/header/icons/Logo.vue";
 import Bell from "@/components/app/header/Bell.vue";
 import BurgerMenu from "@/components/app/header/icons/BurgerMenu.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {isActive, menuItems} from "@/composables/useMenuItems";
 import Close from "@/components/app/header/icons/Close.vue";
 import {useRoute} from "vue-router";
+import CitySelectIcon from "@/components/app/header/icons/CitySelectIcon.vue";
+import type {ICity} from "@/types/menuInterfaces";
 
-
-const route = useRoute()
 
 // Отрыто ли меню
 const isOpen = ref<boolean>(false)
@@ -16,41 +16,62 @@ const isOpen = ref<boolean>(false)
 const toglleMenu = () => {
   return isOpen.value = !isOpen.value
 }
+
+// Выбор города
+const selectedCity = ref<ICity>({id: 1, label: "Москва и область"})
+const cities = ref<ICity[]>([])
+
+// Высота экрана
+const heightDevice = computed(() => window.innerHeight-45)
 </script>
 
 <template>
-  <div class="item">
-    <div class="logo">
-      <router-link :to="'/'"><Logo/></router-link>
-    </div>
-    <div class="right-menu">
-      <Bell style="margin-right: 18px;"/>
-      <BurgerMenu
-          @click="toglleMenu"
-          v-show="!isOpen"
-      />
-      <Close
-          @click="toglleMenu"
-          v-show="isOpen"
-      />
-    </div>
-  </div>
-
-  <nav v-show="isOpen">
-    <ul>
-      <li
-          v-for="item in menuItems()"
-          :key="item.id"
-      >
-        <router-link
-            class="link"
-            :to="item.link"
-        >
-          {{ item.label }}
+  <header>
+    <div class="item">
+      <div class="logo">
+        <router-link :to="'/'">
+          <Logo/>
         </router-link>
-      </li>
-    </ul>
-  </nav>
+      </div>
+      <div class="right-menu">
+        <Bell style="margin-right: 18px;"/>
+        <BurgerMenu
+            @click="toglleMenu"
+            v-show="!isOpen"
+        />
+        <Close
+            @click="toglleMenu"
+            v-show="isOpen"
+        />
+      </div>
+    </div>
+
+    <div
+        class="menu"
+        v-show="isOpen"
+        :style="{ 'height': `${heightDevice}px` }"
+    >
+      <nav>
+        <ul>
+          <li
+              v-for="item in menuItems()"
+              :key="item.id"
+          >
+            <router-link
+                class="link"
+                :to="item.link"
+            >
+              {{ item.label }}
+            </router-link>
+          </li>
+        </ul>
+      </nav>
+      <div class="city">
+        <CitySelectIcon/>
+        <span>{{ selectedCity.label }}</span>
+      </div>
+    </div>
+  </header>
 </template>
 
 <style scoped lang="scss">
@@ -99,5 +120,29 @@ li {
 
 .link {
   font-weight: bold;
+}
+
+.city {
+  background: #F3F5F6;
+  height: 55px;
+  color: #959597;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 10px;
+
+  span {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
