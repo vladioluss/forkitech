@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {RouterView, useRoute} from 'vue-router'
+import {RouterView} from 'vue-router'
 import {computed} from "vue";
 import DesktopHeader from "@/components/app/header/desktop/DesktopHeader.vue";
 import MobileHeader from "@/components/app/header/mobile/MobileHeader.vue";
