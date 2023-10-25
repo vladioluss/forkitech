@@ -1,9 +1,9 @@
-import { ref, computed } from 'vue'
+import { ref} from 'vue'
 import { defineStore } from 'pinia'
-import type {ICity} from "@/types/menuInterfaces";
+import type {IMenuItems} from "@/types/menuInterfaces";
 
 
-let arrCities: ICity[] = [
+let arrCities: IMenuItems[] = [
   {id: 1, link: '/advantages', label: 'Преимущества Теle2'},
   {id: 2, link: '/tariffs', label: 'Тарифы'},
   {id: 3, link: '/shares', label: 'Акции и спецпредложения'},
@@ -13,14 +13,14 @@ let arrCities: ICity[] = [
 ]
 
 export const useMenuStore = defineStore('menu', () => {
-  const cities = ref<ICity[]>(arrCities)
+  const itemsMenu = ref<IMenuItems[]>(arrCities)
 
-  function getCities() {
-    return cities.value
+  function getItemsMenu() {
+    return itemsMenu.value
   }
 
   return {
-    cities,
-    getCities,
+    itemsMenu,
+    getItemsMenu,
   }
 })

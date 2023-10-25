@@ -11,12 +11,10 @@ const headers = {
   'mobile': MobileHeader,
 }
 
-// Определяем устройство
-const isMobile = (): boolean => {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-}
+// Определяем размера устройства
+const isMobile = (): boolean => window.innerWidth < 768
 
-// Определение хедера в зависимости от типа устройства
+// Определение хедера в зависимости от размера устройства
 const header = computed(() => {
   return isMobile() ? headers['mobile'] : headers['desktop']
 })

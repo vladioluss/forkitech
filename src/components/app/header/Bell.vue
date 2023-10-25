@@ -8,7 +8,7 @@ const active = ref<boolean>(false)
 // Допустим, пришло уведомление, показываем реакцию
 setTimeout((): void => {
   active.value = true
-}, 3000)
+}, 1000)
 </script>
 
 <template>
