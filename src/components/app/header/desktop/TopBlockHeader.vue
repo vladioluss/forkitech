@@ -3,23 +3,23 @@ import {ref} from "vue";
 import {ICity} from "@/types/menuInterfaces";
 import Logo from "@/components/app/header/icons/Logo.vue";
 import CitySelectIcon from "@/components/app/header/icons/CitySelectIcon.vue";
-import Bell from "@/components/app/header/icons/Bell.vue";
+import Bell from "@/components/app/header/Bell.vue";
 
 
-const selectedCity = ref<ICity>({})
+const selectedCity = ref<ICity>({id: 0, label: "", link: ""})
 const cities = ref<ICity[]>([])
 </script>
 
 <template>
   <div class="item">
     <div class="logo">
-      <Logo/>
+      <router-link :to="'/'"><Logo/></router-link>
     </div>
 
     <div class="right-block">
       <div class="city-selector">
         <CitySelectIcon/>
-        Москва и область
+        <span>Москва и область</span>
       </div>
       <div>
         <Bell/>
@@ -29,9 +29,6 @@ const cities = ref<ICity[]>([])
 </template>
 
 <style scoped lang="scss">
-$black-general-color: #1F2229;
-$gray-400-placeholder-color: #7C8792;
-
 .item {
   display: flex;
   width: 100%;

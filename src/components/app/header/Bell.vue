@@ -2,23 +2,22 @@
 import BellIndicator from "@/components/app/header/icons/BellIndicator.vue";
 import {ref} from "vue";
 
+// Активность показа анимации уведомления
+const active = ref<boolean>(false)
 
-const active = ref<boolean>(true)
-
-const toggleBellAnimation = () => {
-  active.value = !active.value;
-}
+// Допустим, пришло уведомление, показываем реакцию
+setTimeout((): void => {
+  active.value = true
+}, 3000)
 </script>
 
 <template>
   <div
       @click="active = false"
-      :class="{
-        'disable-animation': !toggleBellAnimation,
-        'notification-box': toggleBellAnimation
-      }"
+      class="notification-box"
   >
-    <svg class="bell"
+    <svg :class="{ 'disable-animation': !active }"
+        class="bell"
          xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
       <g id="Icons/Notification-Bell">
         <path id="notification-bell" fill-rule="evenodd" clip-rule="evenodd"
@@ -43,7 +42,7 @@ const toggleBellAnimation = () => {
   position: relative;
   bottom: 32px;
   left: 12px;
-  animation: zoom 3s 3s both infinite;
+  animation: zoom 1s 1s both 1;
 }
 
 .notification-box {
@@ -89,10 +88,10 @@ const toggleBellAnimation = () => {
     opacity: 1;
   }
   51% {
-    opacity: 0;
+    opacity: 1;
   }
   100% {
-    opacity: 0;
+    opacity: 1;
   }
 }
 

@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import {RouterView, useRoute} from 'vue-router'
 import {computed} from "vue";
-import TheHeader from "@/components/app/header/DesktopHeader.vue";
-import MobileHeader from "@/components/app/header/MobileHeader.vue";
+import TheHeader from "@/components/app/header/desktop/DesktopHeader.vue";
+import MobileHeader from "@/components/app/header/mobile/MobileHeader.vue";
 
-
-const route = useRoute();
 
 // Все хедеры
 const headers = {
@@ -29,6 +27,5 @@ const header = computed(() => {
   <RouterView />
 </template>
 
-<style scoped>
-
+<style lang="scss">
 </style>
