@@ -56,6 +56,9 @@ header {
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .menu {
